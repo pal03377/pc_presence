@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>PC Presence</title>
+    <script src="index.js" type="text/javascript"></script>
+
+    <style>
+        @font-face {
+            font-family: "Lato";
+            src: url(font/Lato-Regular.ttf) format("truetype");
+        }
+
+        body {
+            -webkit-user-select: none;
+            font-family: "Lato";
+        }
+
+        #xbutton,
+        #minbutton {
+            position: absolute;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            -webkit-app-region: no-drag;
+        }
+
+        #xbutton {
+            position: fixed;
+            top: 5px;
+            right: 5px;
+        }
+
+        #minbutton {
+            position: fixed;
+            top: 5px;
+            right: 30px;
+        }
+
+        #login {
+            text-align: center;
+        }
+
+        input {
+            -webkit-app-region: no-drag;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: solid 3px #ddd;
+            transition: border 0.5s;
+        }
+
+        #loginbutton {
+            -webkit-app-region: no-drag;
+            width: 50vw;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // prevent dragging a file in, src: http://stackoverflow.com/a/31672770
+        document.addEventListener('dragover', function(event) {
+            event.preventDefault();
+            return false;
+        }, false);
+
+        document.addEventListener('drop', function(event) {
+            event.preventDefault();
+            return false;
+        }, false);
+    </script>
+</head>
+
+<body style="-webkit-app-region: drag;">
+    <img id="minbutton" src="img/min.png" alt="_" title="minimize window" onclick="require('electron').remote.getCurrentWindow().minimize();">
+    <img id="xbutton" src="img/x.png" alt="X" title="close window" onclick="window.close();">
+    <div class="screen" id="login">
+        <h1>Login</h1>
+        <p>URL to server<br><i>default: <br>presence.pythonanywhere.com</i></p>
+        <input id="urlInput" type="text" placeholder="URL" value="presence.pythonanywhere.com"><br>
+        <p>Team name:</p>
+        <input id="teamInput" type="text" placeholder="team name"><br>
+        <p>Team password:</p>
+        <input id="pwdInput" type="password" placeholder="team password"><br>
+        <p>Your name:</p>
+        <input id="usernameInput" type="text" placeholder="your name"><br><br>
+        <img src="img/loginbutton.png" id="loginbutton" onclick="loginToTeamServer();">
+        <br><br>
+    </div>
+    <div class="screen" id="onoffview"></div>
+</body>
+
+</html>
