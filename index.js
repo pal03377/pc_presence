@@ -16,12 +16,27 @@ function httpGetAsync(theUrl, callback) {
   xmlHttp.send(null);
 }
 
+function getSetting(settingName, fromForm) {
+  if (fromForm) {
+    return document.getElementById(settingName + "Input").value;
+  }
+  return localStorage.getItem(settingName);
+}
+
+
 function onLoginResult(res) {
   currentLoginIndex++;
   if (res !== "correct") {
     onLoginGetError("Your login information is wrong. Please check it again.");
     return;
   }
+  isLoggedIn = true;
+  localStorage.setItem("team", getSetting("team", true));
+  localStorage.setItem("pwd", getSetting("pwd", true));
+  localStorage.setItem("username", getSetting("username", true));
+  localStorage.setItem("url", getServer("url", true));
+  document.getElementById("login").style.display = "none";
+  document.getElementById("onoffview").style.display = "block";
 }
 
 function onLoginGetError(err) {
@@ -48,7 +63,7 @@ function loginToTeamServer() {
         onLoginGetError("Connection timed out. Make sure your server is set up properly.");
       }
     }, TIMEOUT);
-    httpGetAsync("http://"+document.getElementById("urlInput").value, onLoginResult);
+    httpGetAsync("http://" + document.getElementById("urlInput").value + "/login/" + getTeamName(true) + "/" + getPwd(true), onLoginResult);
   } catch (e) {
     onLoginGetError("The URL is invalid.");
   }

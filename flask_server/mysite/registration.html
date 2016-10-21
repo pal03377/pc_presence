@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <title>PC Presence Team Registration</title>
+    <script>
+        function submitRegistration() {
+            var teamname = document.getElementById("teamname").value;
+            var teampwd = document.getElementById("teampwd").value;
+            window.location.href = "/register/"+teamname+"/"+teampwd;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Team Registration</h1>
+    <input type="text" placeholder="team name" id="teamname"><br>
+    <input type="password" placeholder="team password" id="teampwd">
+    <button onclick="submitRegistration();">Submit</button>
+</body>
+
+</html>
