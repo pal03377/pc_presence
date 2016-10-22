@@ -16,7 +16,7 @@ function createWin() {
     resizable: false
   }); // TODO
   win.loadURL('file://' + __dirname + '/index.html');
-  // win.webContents.openDevTools(); // TODO
+  // win.webContents.openDevTools(); // TODO: comment out
   win.on("closed", function () {
     win = null;
   });
