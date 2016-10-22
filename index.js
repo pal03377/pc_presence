@@ -31,15 +31,20 @@ function onLoginResult(res) {
     return;
   }
   isLoggedIn = true;
-  localStorage.setItem("team", getSetting("team", true));
-  localStorage.setItem("pwd", getSetting("pwd", true));
-  localStorage.setItem("username", getSetting("username", true));
-  localStorage.setItem("url", getServer("url", true));
+  if (localStorage.getItem("team") == null) {
+    localStorage.setItem("team", getSetting("team", true));
+    localStorage.setItem("pwd", getSetting("pwd", true));
+    localStorage.setItem("username", getSetting("username", true));
+    localStorage.setItem("url", getSetting("url", true));
+  }
   document.getElementById("login").style.display = "none";
   document.getElementById("onoffview").style.display = "block";
+  fetchOnOffStates();
+  setInterval(fetchOnOffStates, 60000); // refresh every minute
 }
 
 function onLoginGetError(err) {
+  currentLoginIndex++;
   dialog.showMessageBox({
     "type": "error",
     "buttons": ["OK"],
@@ -49,7 +54,37 @@ function onLoginGetError(err) {
   });
 }
 
-function loginToTeamServer() {
+function fetchOnOffStates(res) {
+  if (res === undefined) {
+    httpGetAsync("http://" + getSetting("url") + "/stillOnline/" + getSetting("username") + "/" + getSetting("team") + "/" + getSetting("pwd"), fetchOnOffStates);
+  } else {
+    var onOffDict = JSON.parse(res);
+    var space2writeto = document.getElementById("onoffview");
+    var allPeople = Object.keys(onOffDict);
+    if (allPeople.length <= 0) {
+      space2writeto.innerHTML = "no people in your team"; // should never happen
+    } else {
+      space2writeto.innerHTML = "";
+    }
+    for (var i = 0; i < allPeople.length; i++) {
+      var personindicator = document.createElement("p");
+      personindicator.innerHTML = allPeople[i];
+      if (onOffDict[allPeople[i]]) {
+        // person online
+        personindicator.style.color = "green";
+        personindicator.style.fontWeight = "bold";
+      } else {
+        personindicator.style.color = "red";
+      }
+      space2writeto.appendChild(personindicator);
+    }
+  }
+}
+
+function loginToTeamServer(fromLoginForm) {
+  if (fromLoginForm == null) {
+    fromLoginForm = true;
+  }
   try {
     if (!navigator.onLine) {
       onLoginGetError("You don't have an internet connection.");
@@ -63,8 +98,15 @@ function loginToTeamServer() {
         onLoginGetError("Connection timed out. Make sure your server is set up properly.");
       }
     }, TIMEOUT);
-    httpGetAsync("http://" + document.getElementById("urlInput").value + "/login/" + getTeamName(true) + "/" + getPwd(true), onLoginResult);
+    httpGetAsync("http://" + getSetting("url", fromLoginForm) + "/login/" + getSetting("team", fromLoginForm) + "/" + getSetting("pwd", fromLoginForm), onLoginResult);
   } catch (e) {
+    console.warn(e);
     onLoginGetError("The URL is invalid.");
+  }
+}
+
+function start() {
+  if (localStorage.getItem("team") != null) {
+    loginToTeamServer(false);
   }
 }
