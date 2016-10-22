@@ -1,5 +1,6 @@
 {
     "name": "PC_Presence",
+    "description": "PC Presence",
     "version": "0.1.0",
     "main": "main.js",
     "dependencies": {

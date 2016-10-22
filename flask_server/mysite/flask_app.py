@@ -77,3 +77,8 @@ def stillOnline(myname, team, pwd):
         onOffPeople[person] = (
             (currentTime - peopledict[person]) < offlineAfterTime)
     return json.dumps(onOffPeople)
+
+
+@app.route("/icon")
+def getIcon():
+    return send_from_directory(mydir, "icon.png")
