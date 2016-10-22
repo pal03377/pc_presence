@@ -38,7 +38,7 @@ function onLoginResult(res) {
     localStorage.setItem("url", getSetting("url", true));
   }
   document.getElementById("login").style.display = "none";
-  document.getElementById("onoffview").style.display = "block";
+  document.getElementById("onoffscreen").style.display = "block";
   fetchOnOffStates();
   setInterval(fetchOnOffStates, 60000); // refresh every minute
 }

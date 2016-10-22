@@ -12,10 +12,11 @@ function createWin() {
     title: "PC Presence",
     width: 250,
     height: 400,
-    frame: false
-  }); //, resizable: false}); // TODO
+    frame: false,
+    resizable: false
+  }); // TODO
   win.loadURL('file://' + __dirname + '/index.html');
-  win.webContents.openDevTools(); // TODO
+  // win.webContents.openDevTools(); // TODO
   win.on("closed", function () {
     win = null;
   });

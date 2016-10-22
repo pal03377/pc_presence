@@ -18,8 +18,13 @@
 
         #xbutton,
         #minbutton {
-            position: absolute;
             top: 5px;
+        }
+
+        #xbutton,
+        #minbutton,
+        .infoicon {
+            position: absolute;
             width: 20px;
             height: 20px;
             -webkit-app-region: no-drag;
@@ -41,7 +46,8 @@
             text-align: center;
         }
 
-        #onoffview {
+        #onoffscreen,
+        #info {
             display: none;
         }
 
@@ -58,6 +64,16 @@
             -webkit-app-region: no-drag;
             width: 50vw;
             cursor: pointer;
+        }
+
+        #info {
+            text-align: center;
+        }
+
+        .infoicon {
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
         }
     </style>
     <script>
@@ -90,8 +106,29 @@
         <img src="img/loginbutton.png" id="loginbutton" onclick="loginToTeamServer();">
         <br><br>
     </div>
-    <div class="screen" id="onoffview">
-        <h1>Loading</h1>
+    <div class="screen" id="onoffscreen">
+        <div id="onoffview">
+            <h1>Loading</h1>
+        </div>
+        <img class="infoicon" src="img/info.png" onclick='document.getElementById("onoffscreen").style.display="none";document.getElementById("info").style.display="block";'>
+    </div>
+    <div class="screen" id="info">
+        <h1>PC Presence Info</h1>
+        <h2>Reset Settings</h2>
+        <p onclick="localStorage.clear();location.reload();" style="-webkit-app-region: no-drag; color: red; cursor: pointer;">Reset and Re-login</p>
+        <h2>Author</h2>
+        <p>palsch</p>
+        <h2>License</h2>
+        <p>
+            MIT License<br>
+            <br> Copyright (c) 2016 palsch and other contributors<br>
+            <br> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to
+            use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>
+            <br> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+            TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+            ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        </p>
+        <img class="infoicon" src="img/xblue.png" onclick='document.getElementById("onoffscreen").style.display="block";document.getElementById("info").style.display="none";'>
     </div>
     <script>
         start();
