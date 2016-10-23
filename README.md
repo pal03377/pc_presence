@@ -70,3 +70,5 @@ Whenever you turn your PC back on, you'll have to start PC Presence to make you 
 - Notifications
 - Auto-Updating
 - Autostart
+
+![PC Presence icon](https://raw.githubusercontent.com/pal03377/pc_presence/master/icon.ico)
