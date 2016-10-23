@@ -8,7 +8,7 @@ This is a small tool that allows you to make an easy network where any PC can se
 
 ## Instructions
 
-- Download the installers onto each of your PCs.
+- Download the installer onto each of your PCs (depending on your system architecture, it is the PC-Presence_Setup_x[something].exe file in this repository).
 - Install PC Presence.
 - When you open the app, it wants you to enter a "server URL".
 - From here on there are two possible ways:
