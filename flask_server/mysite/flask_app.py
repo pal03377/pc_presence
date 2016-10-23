@@ -26,6 +26,8 @@ def home():
 def registerTeam(team=None, pwd=None):
     if not registrationEnabled:
         return "Sorry, your admin has disabled team registrations."
+    if os.path.exists(mydir + "/" + team + ".onOffInfo"):
+        return "This team already exists!"
     if team is None:
         to_return = ""
         with open(mydir + "/registration.html", "r") as f:

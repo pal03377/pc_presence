@@ -52,3 +52,21 @@ If you want to disable other team registrations on your server (so no other peop
 Now you'll find a line in the editor that says `registrationEnabled = True`. Change it to `registrationEnabled = False`.
 
 On the upper right corner, click on "Save" and on the reload button (with the two arrows).
+
+## Security
+
+Sorry, there is not much. You can't double-register teams. PC Presence will allow double logins from the same user and will not verify anything.
+
+## Refresh rate
+
+PC Presenter refreshes online/offline every minute. When the program is closed, your status changes to offline after 2 minutes.
+
+## Autostart
+
+Whenever you turn your PC back on, you'll have to start PC Presence to make you visible in the team. You can also [put PC Presence into the Autostart folder](http://tunecomp.net/add-app-to-startup/).
+
+## Plans for the future
+
+- Notifications
+- Auto-Updating
+- Autostart
